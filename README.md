@@ -23,6 +23,29 @@ repos = user.get_repos()
 # Print repository names
 for repo in repos:
     print(repo.name)
+    import mne
+import requests
+from github import Github
+
+# Load EEG data
+raw = mne.io.read_raw_fif('your_eeg_data.fif', preload=True)
+
+# Filter data
+raw.filter(l_freq=1.0, h_freq=40.0)
+
+# Plot raw data
+raw.plot(n_channels=10, scalings='auto', show=True, block=True)
+
+# Authenticate to GitHub
+g = Github("your_access_token")
+
+# Get user repositories
+user = g.get_user()
+repos = user.get_repos()
+
+# Print repository names
+for repo in repos:
+    print(repo.name)
     name: EEG Data Integration
 
 on:
